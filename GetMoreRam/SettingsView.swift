@@ -94,7 +94,7 @@ struct SettingsView: View {
     // MARK: Sections
 
     private var header: some View {
-        BrandHeader(icon: "memorychip.fill",
+        BrandHeader(useAppIcon: true,
                     title: "ram 6itoon",
                     subtitle: "Increased Memory Limit".loc) {
             StatusPill(

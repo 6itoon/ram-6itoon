@@ -233,9 +233,12 @@ struct LinkRow: View {
     }
 }
 
-/// The hero at the top of each screen: a glyph, the title, and an accessory.
+/// The hero at the top of each screen: app logo (or SF Symbol), title, accessory.
 struct BrandHeader<Accessory: View>: View {
-    var icon: String
+    /// SF Symbol name. Ignored when `useAppIcon` is true.
+    var icon: String = "memorychip.fill"
+    /// When true, shows the app logo asset instead of an SF Symbol.
+    var useAppIcon: Bool = false
     var title: String
     var subtitle: String? = nil
     @ViewBuilder var accessory: () -> Accessory
@@ -243,11 +246,19 @@ struct BrandHeader<Accessory: View>: View {
     var body: some View {
         VStack(spacing: 14) {
             ZStack {
-                RoundedRectangle(cornerRadius: 23, style: .continuous)
-                    .fill(Theme.brand)
-                Image(systemName: icon)
-                    .font(.system(size: 40, weight: .semibold))
-                    .foregroundStyle(.white)
+                if useAppIcon {
+                    Image("AppLogo")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 86, height: 86)
+                        .clipShape(RoundedRectangle(cornerRadius: 23, style: .continuous))
+                } else {
+                    RoundedRectangle(cornerRadius: 23, style: .continuous)
+                        .fill(Theme.brand)
+                    Image(systemName: icon)
+                        .font(.system(size: 40, weight: .semibold))
+                        .foregroundStyle(.white)
+                }
             }
             .frame(width: 86, height: 86)
             .shadow(color: Theme.glow, radius: 20, x: 0, y: 12)
@@ -271,6 +282,7 @@ struct BrandHeader<Accessory: View>: View {
         .padding(.top, 8)
     }
 }
+
 
 // MARK: - Field styling
 

@@ -89,7 +89,7 @@ struct AppIDView : View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 18) {
-                    BrandHeader(icon: "square.stack.3d.up.fill",
+                    BrandHeader(useAppIcon: true,
                                 title: "App IDs".loc,
                                 subtitle: "Increased Memory Limit".loc) {
                         StatusPill(
